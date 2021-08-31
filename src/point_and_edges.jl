@@ -5,10 +5,9 @@ struct Point{T} <: FieldVector{2, T}
     y::T
 end
 
-struct Edge{A <: AbstractArray{Point}} 
+struct Edge{T<:AbstractFloat, A <: AbstractVector{Point{T}}}
     nodes::A
-end
-
+end 
 
 source(P::Edge) = P.nodes[1]
 target(P::Edge) = P.nodes[end]
