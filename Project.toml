@@ -1,0 +1,10 @@
+name = "ForceBundle"
+uuid = "af979e91-5043-49d9-83b0-4120cef920f4"
+authors = ["Tabita Catalan <tabicm.nhg@gmail.com>"]
+version = "0.1.0"
+
+[deps]
+CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
+LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
+StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
+StructArrays = "09ab397b-f2b6-538f-b94a-2f83cf4a842a"
