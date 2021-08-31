@@ -1,0 +1,3 @@
+var documenterSearchIndex = {"docs":
+[{"location":"compatibility_measures.html#Compatibility-Measures","page":"Compatibility Measures","title":"Compatibility Measures","text":"","category":"section"},{"location":"compatibility_measures.html","page":"Compatibility Measures","title":"Compatibility Measures","text":"All compatibility measures defined by paper are available. ","category":"page"},{"location":"compatibility_measures.html#Angle-Compatibility","page":"Compatibility Measures","title":"Angle Compatibility","text":"","category":"section"},{"location":"compatibility_measures.html","page":"Compatibility Measures","title":"Compatibility Measures","text":"ForceBundle.Ca ","category":"page"}]
+}
