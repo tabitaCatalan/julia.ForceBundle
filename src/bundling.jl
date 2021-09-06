@@ -1,12 +1,17 @@
-
 """
 bundle!(P::Edge, forces, ds)
 Bundle edge P applying a vector of forces on every inner subdivision, and moving
 in a ammount ds
 """
-function bundle!(P::Edge, forces, ds)
-inner_nodes(P).x .+= forces.x * ds
-inner_nodes(P).y .+= forces.y * ds
+function bundle!(P::Edge, inner_forces, ds)
+    #inner_nodes(P).x .+= forces.x * ds
+    #inner_nodes(P).y .+= forces.y * ds
+    
+    # TODO do this in a better way
+    for i in inner_range(P)
+        node(P,i).x += inner_forces[i-1].x * ds 
+        node(P,i).y += inner_forces[i-1].y * ds
+    end 
 end
 
 
