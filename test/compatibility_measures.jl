@@ -31,3 +31,15 @@ using Test, ForceBundle
     @test ForceBundle.Ca(P, V) == 0
     @test ForceBundle.Ca(P, T) > 0
 end 
+
+@testset "visibility" begin
+    p0 = Point(0.,0.)
+    p1 = Point(1.,1.)
+    q1 = Point(-1.,1.)
+
+    # perpendicular edges 
+    P = Edge(p0, p1)
+    Q = Edge(p0, q1)
+    @test ForceBundle.visibility(P,Q) == 0
+    @test ForceBundle.visibility(Q,P) == 0
+end 
