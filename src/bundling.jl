@@ -42,7 +42,7 @@ function update_divisions(edge::Edge, P)
             i += 1
         else
             current_node += remaining_segment_len * direction
-            push!(new_nodes, current_node)
+            push_node!(new_nodes, current_node)
             remaining_segment_len = new_segments_len
         end
     end

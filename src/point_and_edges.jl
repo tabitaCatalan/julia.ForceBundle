@@ -26,6 +26,11 @@ function ListOfNodes(source::Point{T}, target::Point{T}; subdivisions = 1) where
     ListOfNodes([source + i/(N+1) * (target - source) for i = 0:N+1]) 
 end
 
+function push_node!(list::ListOfNodes, node::Point)
+    push!(StructArrays.components(list).x , node.x)
+    push!(StructArrays.components(list).y , node.y)
+end 
+
 #=
 Edge 
 =#
