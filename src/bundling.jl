@@ -12,7 +12,7 @@ end
 
 function bundling_iteration(edges, K, ds)
     range = 1:length(edges)
-    forces = [StructArray(calculate_electro_forces(edges, i) + calculate_spring_forces(edges[i], K)) for i in range]
+    forces = ListOfNodes([calculate_electro_forces(edges, i) + calculate_spring_forces(edges[i], K) for i in range])
     for i in range
         bundle!(edges[i], forces[i], ds)
     end
@@ -30,7 +30,7 @@ function update_divisions(edge::Edge, P)
     nods = nodes(edge)
     new_segments_len = L/(P+1) #segment_length
     current_node = source(edge)
-    new_nodes = StructArray([current_node])
+    new_nodes = ListOfNodes([current_node])
     remaining_segment_len = new_segments_len #current...
     i = 2
     while i <= length(nods)
