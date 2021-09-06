@@ -1,4 +1,4 @@
-using Test, ForceBundle, StructArrays
+using Test, ForceBundle, StructArrays, LinearAlgebra
 
 @testset "update divisions" begin
     aux1 = Point(2.,1.)
