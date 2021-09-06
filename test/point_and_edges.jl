@@ -38,6 +38,24 @@ end;
      
 end 
 
+@testset "pushing nodes to list" begin
+    p0 = Point(0.,0.)
+    p1 = Point(0.,1.)
+    
+    L = ListOfNodes(p0,p1, subdivisions = 0) 
+    @test L[1] == p0
+    @test L[end] == p1 
+    @test length(L) == 2
+
+    p2 = Point(0.,2.)
+
+    ForceBundle.push_node!(L, p2)
+    @test L[1] == p0
+    @test L[2] == p1
+    @test L[end] == p2 
+    @test length(L) == 3
+    
+end 
 
 @testset "list of nodes from list of points" begin
     #=
