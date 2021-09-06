@@ -1,5 +1,26 @@
 using Test, ForceBundle, StructArrays, LinearAlgebra
 
+@testset "bundling" begin
+    p0 = Point(0.,0.)
+    p1 = Point(2.,0.)
+    P = Edge(p0,p1)
+    @test ForceBundle.nodes(P)[1] == p0
+    @test ForceBundle.nodes(P)[2] == (p0 + p1)/2
+    @test ForceBundle.nodes(P)[end] == p1
+    @test length(ForceBundle.nodes(P)) == 3
+
+    forces = ListOfNodes([Point(0.,1.)])
+    ds = 0.1 
+
+    ForceBundle.bundle!(P, forces, ds) 
+    @test ForceBundle.nodes(P)[1] == p0
+    @test ForceBundle.nodes(P)[2] == (p0 + p1)/2 + Point(0.,0.1)
+    @test ForceBundle.nodes(P)[end] == p1
+    @test length(ForceBundle.nodes(P)) == 3
+
+end 
+
+
 @testset "update divisions" begin
     aux1 = Point(2.,1.)
     aux2 = Point(0.5,0.)
