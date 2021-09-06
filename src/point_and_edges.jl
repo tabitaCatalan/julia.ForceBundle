@@ -50,7 +50,7 @@ end
 # NamedTuple{(:x, :y),Tuple{Vector{T},Vector{T}}}
 # A = StructArray{Point{Float64}, 1, NamedTuple{(:x, :y),Tuple{Array{Int64,1},Array{Int64,1}}}}((x = [1,2], y = [3,4]))
 
-nodes(P::Edge) = @view P.nodes[:]
+nodes(P::Edge) = P.nodes
 node(P::Edge, i) = LazyRow(P.nodes, i)
 
 subdivisions(P::Edge) = length(P.nodes) - 2
