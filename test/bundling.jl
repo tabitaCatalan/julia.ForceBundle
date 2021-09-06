@@ -10,7 +10,7 @@ using Test, ForceBundle, StructArrays
     z = sqrt((4 * sqrt(5) - norm(b-a) - norm(c-b))^2 - (7. - c.x)^2) + c.y
     d = Point(7., z)
 
-    original_edge = StructArray([a,b,c,d])
+    original_edge = ListOfNodes([a,b,c,d])
     new_edge = ForceBundle.update_divisions(Edge(original_edge), 3)
     new_nodes = ForceBundle.nodes(new_edge)
 
