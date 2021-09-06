@@ -14,7 +14,7 @@ using Test, ForceBundle, StructArrays
     new_edge = ForceBundle.update_divisions(Edge(original_edge), 3)
     new_nodes = ForceBundle.nodes(new_edge)
 
-    @test ForceBundle.bundled_length(original_edge)  == 4 * sqrt(5)
+    @test ForceBundle.bundled_length(original_edge) ≈ 4 * sqrt(5)
     @test aux1 ≈ new_nodes[2]
     @test 2 * aux1 + a ≈ new_nodes[3]
     @test d + sqrt(5)*(c-d)/norm(c-d) ≈ new_nodes[4]
