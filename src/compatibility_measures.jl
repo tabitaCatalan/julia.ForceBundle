@@ -1,7 +1,40 @@
+using LinearAlgebra:inv 
 
 # Auxiliar functions
 avglen(P::Edge, Q::Edge) = (len(P) + len(Q))/2
 slope(P::Edge) = asvector(P).y/asvector(P).x
+
+"""
+    intersection_point(q0::Point, vecQ::Point, P::Edge)
+Return the `Point` where the rect which pass over `q0` with 
+direction `vecQ` intersects the rect defined by the edge `P`.
+
+# Example
+
+```julia
+julia> q0 = Point(1.,1.)
+julia> vecQ = Point(-1.,-1.)
+julia> P = Edge(Point(-1.,2.), Point(1.,2.))
+julia> intersection_point(p,d,Q)
+2-element Point{Float64} with indices SOneTo(2):
+ 2.0
+ 2.0
+```
+
+# Notes 
+See this [Issue in python.ForceBundle](https://github.com/tabitaCatalan/python.ForceBundle/issues/3)
+for further discussion. 
+A Kroki diagram could be usefull here.
+"""
+function intersection_point(q0::Point, vecQ::Point, P::Edge)
+    vecP = asvector(P)
+    p0 = source(P)
+    aux = inverseofconcated(vecP,vecQ) * (q0 - p0)
+    intersection = aux[1] * vecP + p0
+    intersection 
+end
+
+inverseofconcated(d::Point,v::Point) = inv(hcat(d, v))
 
 function proyectpoint(q::Point, m, P::Edge)
     x_proyection = (-m * q.x + q.y + slope(P)*source(P).x - source(P).y)/(slope(P) - m)
