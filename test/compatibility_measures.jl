@@ -1,4 +1,5 @@
-using Test, ForceBundle  
+using Test 
+using ForceBundle: Point, Edge, intersection_point
 
 @testset "angle compatibility" begin
     # Points 
@@ -31,6 +32,50 @@ using Test, ForceBundle
     @test ForceBundle.Ca(P, V) == 0
     @test ForceBundle.Ca(P, T) > 0
 end 
+
+@testset "intersection: simple case" begin
+    #=
+    Punto de intersección de la recta que sale de `p` con 
+    dirección `d` con la recta definida por la arista Q  
+    =# 
+    p = Point(1.,0.)
+    d = Point(3.,1.)
+    Q = Edge(Point(2.,3.), Point(3.,2.))
+
+    x = Point(4.,1.)
+    @test intersection_point(p,d,Q) == x 
+    @test intersection_point(p,-d,Q) == x 
+end 
+
+
+@testset "intersection: vertical edge" begin
+    #=
+    Al usar la pendiente se podría generar algún problema
+    =#
+    p = Point(3.,1.)
+    d = Point(-1.,-1.)
+    Q = Edge(Point(1.,0.), Point(1.,1.))
+
+    x = Point(1.,3.)
+    @test intersection_point(p,d,Q) == x
+    @test intersection_point(p,-d,Q) == x
+end 
+
+@testset "intersection: at infinity" begin
+    #=
+    Punto de intersección de la recta que sale de `p` con 
+    dirección `d` con la recta definida por la arista Q. 
+    `d` es paralelo a la dirección definida por Q 
+    =# 
+    p = Point(1.,0.)
+    d = Point(3.,1.)
+    Q = Edge(Point(2.,1), Point(-1.,0.))
+
+    ∞ = Point(Inf,Inf)
+    @test intersection_point(p,d,Q) == ∞
+    @test intersection_point(p,-d,Q) == ∞
+end
+
 
 @testset "visibility" begin
     p0 = Point(0.,0.)
