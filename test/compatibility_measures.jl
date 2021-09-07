@@ -25,7 +25,7 @@ using Test, ForceBundle
     @test ForceBundle.Ca(P, Q) ≈ ForceBundle.Ca(P_new_pos, Q) # invariance to length 
     @test ForceBundle.Ca(P, Q) ≈ ForceBundle.Ca(P_long, Q) # invariance under displacement 
     @test ForceBundle.Ca(P,Q) ≈ ForceBundle.Ca(Q,P) # symmetry  
-    @test ForceBundle.Ca(P, Q) ≈ π/4 
+    @test ForceBundle.Ca(P, Q) ≈ cos(π/4)
     @test ForceBundle.Ca(P, S) == 0
     @test ForceBundle.Ca(P, R) == 0
     @test ForceBundle.Ca(P, V) == 0
