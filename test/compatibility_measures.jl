@@ -69,7 +69,7 @@ end
     =# 
     p = Point(1.,0.)
     d = Point(3.,1.)
-    Q = Edge(Point(2.,1), Point(-1.,0.))
+    Q = Edge(Point(2.,1.), Point(-1.,0.))
 
     ∞ = Point(Inf,Inf)
     @test intersection_point(p,d,Q) == ∞
