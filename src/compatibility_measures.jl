@@ -15,7 +15,7 @@ direction `vecQ` intersects the rect defined by the edge `P`.
 julia> q0 = Point(1.,1.)
 julia> vecQ = Point(-1.,-1.)
 julia> P = Edge(Point(-1.,2.), Point(1.,2.))
-julia> intersection_point(p,d,Q)
+julia> intersection_point(q0,vecQ,P)
 2-element Point{Float64} with indices SOneTo(2):
  2.0
  2.0
