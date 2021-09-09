@@ -56,7 +56,7 @@ end
     d = Point(-1.,-1.)
     Q = Edge(Point(1.,0.), Point(1.,1.))
 
-    x = Point(1.,3.)
+    x = Point(1.,-1.)
     @test intersection_point(p,d,Q) == x
     @test intersection_point(p,-d,Q) == x
 end 
