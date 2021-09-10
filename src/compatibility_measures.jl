@@ -1,4 +1,4 @@
-using LinearAlgebra:inv 
+using LinearAlgebra:inv, det 
 
 # Auxiliar functions
 avglen(P::Edge, Q::Edge) = (len(P) + len(Q))/2
@@ -35,6 +35,7 @@ function intersection_point(q0::Point, vecQ::Point, P::Edge)
 end
 
 inverseofconcated(d::Point,v::Point) = inv(hcat(d, v))
+are_colinear(d1::Point, d2::Point) = det(hcat(d1, d2)) == 0
 
 function proyectpoint(q::Point, m, P::Edge)
     x_proyection = (-m * q.x + q.y + slope(P)*source(P).x - source(P).y)/(slope(P) - m)
