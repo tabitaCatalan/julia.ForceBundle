@@ -1,5 +1,5 @@
 using Test 
-using ForceBundle: Point, Edge, intersection_point
+using ForceBundle: Point, Edge, intersection_point, source, target, halfpi_rotation
 
 @testset "angle compatibility" begin
     # Points 
@@ -73,6 +73,39 @@ end
     @test intersection_point(p,d,Q) == x
     @test intersection_point(p,-d,Q) == x
 end 
+
+@testset "projected edge: simple case" begin
+    #=
+    project Q over the rect defined by P 
+    =#
+    Q = Edge(Point(0.,1.), Point(1.,0.))
+    P = Edge(Point(-3.,4.), Point(-1.,3.))
+    projected = ForceBundle.proyectedEdge(Q, P)
+    @test source(projected) ≈ Point(1.,2.)
+    @test target(projected) ≈ Point(7/3, 7/3 -1)
+end 
+
+
+@testset "projected edge: on horizontal edge" begin
+    #=
+    project Q over the rect defined by P 
+    =#
+    Q = Edge(Point(1.,0.), Point(2.,0.))
+    P = Edge(Point(0.,1.), Point(3.,3.))
+    projected = ForceBundle.proyectedEdge(Q, P)
+    @test source(projected) ≈ Point(1.,1. + 2/3)
+    @test target(projected) ≈ Point(2.,2. + 1/3)
+end 
+
+@testset "π/2 rotation" begin
+    p1 = Point(1.,3.)
+    p1rotated = halfpi_rotation(p1) 
+    p2 = Point(-3.3, -1.2)
+    p2rotated = halfpi_rotation(p2)
+    @test p1rotated ≈ Point(-3.,1.)
+    @test p2rotated ≈ Point(1.2,-3.3)
+end 
+
 @testset "intersection: at infinity" begin
     #=
     Punto de intersección de la recta que sale de `p` con 
