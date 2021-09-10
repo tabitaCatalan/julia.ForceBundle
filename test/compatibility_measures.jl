@@ -61,6 +61,18 @@ end
     @test intersection_point(p,-d,Q) == x
 end 
 
+@testset "intersection: horizontal edge" begin
+    #=
+    Al usar la pendiente se podría generar algún problema
+    =#
+    p = Point(1.,2.)
+    d = Point(0.,-1.)
+    Q = Edge(Point(0.,0.), Point(2.,0.))
+
+    x = Point(1.,0.)
+    @test intersection_point(p,d,Q) == x
+    @test intersection_point(p,-d,Q) == x
+end 
 @testset "intersection: at infinity" begin
     #=
     Punto de intersección de la recta que sale de `p` con 
