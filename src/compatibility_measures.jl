@@ -20,11 +20,6 @@ julia> intersection_point(q0,vecQ,P)
  2.0
  2.0
 ```
-
-# Notes 
-See this [Issue in python.ForceBundle](https://github.com/tabitaCatalan/python.ForceBundle/issues/3)
-for further discussion. 
-A Kroki diagram could be usefull here.
 """
 function intersection_point(q0::Point, vecQ::Point, P::Edge)
     vecP = asvector(P)
@@ -37,16 +32,55 @@ end
 inverseofconcated(d::Point,v::Point) = inv(hcat(d, v))
 are_colinear(d1::Point, d2::Point) = det(hcat(d1, d2)) == 0
 
-function proyectpoint(q::Point, m, P::Edge)
-    x_proyection = (-m * q.x + q.y + slope(P)*source(P).x - source(P).y)/(slope(P) - m)
-    y_proyection = slope(P) * (x_proyection - source(P).x) + source(P).y
+"""
+    halfpi_rotation(p::Point)
+Return `p` after a π/2 in counter clockwise rotation.
+# Example 
+```julia
+julia> halfpi_rotation(Point(1.,0.))
+2-element Point{Float64} with indices SOneTo(2):
+ -0.0
+  1.0
+```
+"""
+function halfpi_rotation(p::Point)
+    Point(-p.y, p.x)
+end 
 
-    Point(x_proyection, y_proyection)
-end
+"""
+    perpendicular_slope(P::Edge)
+See an Edge as a vector and return a Point after rotating in π/2.
 
-function proyectedEdge(Q,P)
-    m = -1/slope(Q)
-    Edge(proyectpoint(source(Q), m, P), proyectpoint(target(Q), m, P))
+# Example 
+
+Define `P` as an `Edge`
+```julia
+julia> P = Edge(Point(1.,3.), Point(5.,1.));
+```
+`P` as a vector is simple `target(P) - source(P)`, ie `Point(4.,-2.)`.
+Rotating in π/2 we obtain `Point(2.,4.)`.
+```julia
+julia> perpendicular_slope(P)
+2-element Point{Float64} with indices SOneTo(2):
+ 2.0
+ 4.0
+```
+"""
+perpendicular_slope(P::Edge) = halfpi_rotation(asvector(P))
+
+"""
+    proyectedEdge(Q::Edge,P::Edge)
+Calculate the intersection between the visibility band of `Q`
+and the rect defined by `P`, and return it as an Edge.
+
+The _visibility band_ of an `Edge` `Q` is defined as the space 
+between the straight lines perpendicular to `Q` passing by `source(Q)`
+and `target(Q)`. 
+"""
+function proyectedEdge(Q::Edge,P::Edge)
+    vecQ = perpendicular_slope(Q)
+
+    Edge(intersection_point(source(Q), vecQ, P), intersection_point(target(Q), vecQ, P))
 end
 
 function visibility(P::Edge, Q::Edge)
