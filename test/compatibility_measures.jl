@@ -121,15 +121,28 @@ end
     @test intersection_point(p,-d,Q) == ∞
 end
 
-
-@testset "visibility" begin
+@testset "visibility: perpendicular edges" begin
     p0 = Point(0.,0.)
     p1 = Point(1.,1.)
     q1 = Point(-1.,1.)
 
-    # perpendicular edges 
     P = Edge(p0, p1)
     Q = Edge(p0, q1)
+    @test ForceBundle.are_perpendicular(P,Q) 
     @test ForceBundle.visibility(P,Q) == 0
     @test ForceBundle.visibility(Q,P) == 0
+end 
+
+@testset "visibility: almost perpendicular edges" begin
+    p0 = Point(0.,0.)
+    p1 = Point(1.,1.)
+
+    ϵ = 1e-8
+    q1 = Point(-1.,1. + ϵ)
+        
+    P = Edge(p0, p1)
+    Q = Edge(p0, q1)
+    @test ~ForceBundle.are_perpendicular(P,Q) 
+    @test abs(ForceBundle.visibility(P,Q)) ≤ ϵ
+    @test abs(ForceBundle.visibility(Q,P)) ≤ ϵ
 end 
