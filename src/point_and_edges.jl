@@ -32,6 +32,12 @@ function push_node!(list::ListOfNodes, node::Point)
 end 
 
 #=
+Utils: accessor to xs and ys 
+=#
+xs(listnodes::ListOfNodes) = StructArrays.components(listnodes).x
+ys(listnodes::ListOfNodes) = StructArrays.components(listnodes).y
+
+#=
 Edge 
 =#
 
@@ -62,8 +68,5 @@ midpoint(P::Edge) = (source(P) + target(P))/2
 asvector(P::Edge) = target(P) - source(P)
 len(P::Edge) = norm(asvector(P))
 
-#=
-Utils: accessor to xs and ys 
-=#
-xs(structarray) = StructArrays.components(structarray, :x)
-ys(structarray) = StructArrays.components(structarray, :y)
+xs(P::Edge) = xs(nodes(P))
+ys(P::Edge) = ys(nodes(P))
