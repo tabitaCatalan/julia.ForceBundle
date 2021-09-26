@@ -31,7 +31,9 @@ end
 
 inverseofconcated(d::Point,v::Point) = inv(hcat(d, v))
 are_colinear(d1::Point, d2::Point) = det(hcat(d1, d2)) == 0
-
+function are_perpendicular(P::Edge, Q::Edge)
+    are_colinear(perpendicular_slope(P), asvector(Q))
+end
 """
     halfpi_rotation(p::Point)
 Return `p` after a π/2 in counter clockwise rotation.
@@ -84,10 +86,14 @@ function proyectedEdge(Q::Edge,P::Edge)
 end
 
 function visibility(P::Edge, Q::Edge)
-    I = proyectedEdge(Q,P)
-    Im = midpoint(I)
-    Pm = midpoint(P)
-    max(1. - 2. * norm(Pm - Im)/norm(source(I) - target(I)), 0.0)
+    if are_perpendicular(P,Q)
+        0 
+    else 
+        I = proyectedEdge(Q,P)
+        Im = midpoint(I)
+        Pm = midpoint(P)
+        max(1. - 2. * norm(Pm - Im)/norm(source(I) - target(I)), 0.0)
+    end
 end
 
 # Compatibility measures 
