@@ -1,7 +1,7 @@
 using Test, ForceBundle 
 
 
-read_edges = ForceBundle.read_edges_csv("test\\testcase.csv")
+read_edges = ForceBundle.read_edges_csv("testcase.csv")
 
 p0 = Point(-1.,0.)
 p1 = Point(0.,1.)
@@ -20,5 +20,7 @@ function are_equal(edge1, edge2)
     return true 
 end 
 
-@test are_equal(P, read_edges[1])
-@test are_equal(Q, read_edges[2])
+@testset "read edges from csv" begin 
+    @test are_equal(P, read_edges[1])
+    @test are_equal(Q, read_edges[2])
+end 
