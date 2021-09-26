@@ -82,4 +82,15 @@ end
     @test ForceBundle.midpoint(P) == Point(2.,2.5)
     @test ForceBundle.asvector(P) == Point(2.,1.)
     @test ForceBundle.len(P) == sqrt(5.)
+end; 
+
+@testset "nodes and inner nodes" begin
+    p0 = Point(1.,2.)
+    p1 = Point(3.,3.)
+    phalf = (p0 + p1)/2 
+    P =  Edge(p0,p1) # subdivisions = 1 
+    L = ListOfNodes([p0, phalf, p1])
+    innerL = ListOfNodes([phalf])
+    @test ForceBundle.nodes(P) == L 
+    @test ForceBundle.inner_nodes(P) == innerL 
 end;
