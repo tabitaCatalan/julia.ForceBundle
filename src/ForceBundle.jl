@@ -9,5 +9,5 @@ include("bundling.jl")
 
 # utilities 
 include("read_csv_edges.jl")
-
+include("plotting.jl")
 end # module
