@@ -1,6 +1,6 @@
 module ForceBundle
 
-export Point, ListOfNodes, Edge
+export Point, ListOfNodes, Edge, forcebundle, read_edges_csv
 
 include("point_and_edges.jl")
 include("compatibility_measures.jl")
