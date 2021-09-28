@@ -27,8 +27,7 @@ function ListOfNodes(source::Point{T}, target::Point{T}; subdivisions = 1) where
 end
 
 function push_node!(list::ListOfNodes, node::Point)
-    push!(StructArrays.components(list).x , node.x)
-    push!(StructArrays.components(list).y , node.y)
+    push!(list, (x = node.x, y = node.y))
 end 
 
 #=
