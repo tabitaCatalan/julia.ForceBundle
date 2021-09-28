@@ -9,7 +9,8 @@ makedocs(modules=[ForceBundle],
          authors="Tabita Catalán",
          pages = Any[
          "ForceBundle.jl" => "index.md",
-         "Compatibility Measures" => "compatibility_measures.md",
+         "Examples" => Any["airlines.md"],
+         #"Compatibility Measures" => "compatibility_measures.md",
         "Inners" => Any["compatibility_measures_inners.md"]
          ]) 
 
