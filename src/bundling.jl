@@ -15,7 +15,7 @@ function bundle!(P::Edge, inner_forces, ds)
 end
 
 
-function bundling_iteration(edges, K, ds)
+function bundling_iteration!(edges, K, ds)
     range = 1:length(edges)
     forces = [calculate_electro_forces(edges, i) + calculate_spring_forces(edges[i], K) for i in range]
     for i in range
