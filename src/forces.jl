@@ -19,18 +19,18 @@ function force_on_node_i(i, edges, index)
 end
 
 function calculate_electro_forces(edges, index)
-    StructArray(force_on_node_i(i,edges, index) for i in inner_range(edges[index]))
+    ListOfNodes([eforce_on_node_i(i,edges, index) for i in inner_range(edges[index])])
 end
 
 """
     calculate_spring_forces(P::Edge, K)
 Calculate spring forces acting on every inner node of an edge P.
-Returns a vector of Static Arrays.
+Returns a `ListOfNodes`.
 """
 function calculate_spring_forces(P::Edge, K)
     all_nodes = nodes(P)
     kp = calculate_kp(P, K)
-    force_on_node_i = (i) -> spring_force(all_nodes[i], all_nodes[i-1], kp) + spring_force(all_nodes[i], all_nodes[i+1], kp)
-    StructArray(force_on_node_i(i) for i in inner_range(P))
+    spring_force_on_node_i = (i) -> spring_force(all_nodes[i], all_nodes[i-1], kp) + spring_force(all_nodes[i], all_nodes[i+1], kp)
+    ListOfNodes([spring_force_on_node_i(i) for i in inner_range(P)])
 end
 

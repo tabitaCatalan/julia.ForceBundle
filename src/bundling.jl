@@ -17,7 +17,7 @@ end
 
 function bundling_iteration(edges, K, ds)
     range = 1:length(edges)
-    forces = ListOfNodes([calculate_electro_forces(edges, i) + calculate_spring_forces(edges[i], K) for i in range])
+    forces = [calculate_electro_forces(edges, i) + calculate_spring_forces(edges[i], K) for i in range]
     for i in range
         bundle!(edges[i], forces[i], ds)
     end
