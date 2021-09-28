@@ -47,7 +47,7 @@ end
 source(P::Edge) = P.nodes[1]
 target(P::Edge) = P.nodes[end]
 
-function Edge(source::Point{T}, target::Point{T}, subdivisions=1) where T <: AbstractFloat
+function Edge(source::Point{T}, target::Point{T}; subdivisions=1) where T <: AbstractFloat
     Edge(ListOfNodes(source, target, subdivisions = subdivisions))
 end
 
