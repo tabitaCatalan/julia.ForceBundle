@@ -106,21 +106,6 @@ end
     @test p2rotated ≈ Point(1.2,-3.3)
 end 
 
-@testset "intersection: at infinity" begin
-    #=
-    Punto de intersección de la recta que sale de `p` con 
-    dirección `d` con la recta definida por la arista Q. 
-    `d` es paralelo a la dirección definida por Q 
-    =# 
-    p = Point(1.,0.)
-    d = Point(3.,1.)
-    Q = Edge(Point(2.,1.), Point(-1.,0.))
-
-    ∞ = Point(Inf,Inf)
-    @test intersection_point(p,d,Q) == ∞
-    @test intersection_point(p,-d,Q) == ∞
-end
-
 @testset "visibility: perpendicular edges" begin
     p0 = Point(0.,0.)
     p1 = Point(1.,1.)
