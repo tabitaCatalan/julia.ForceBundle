@@ -35,6 +35,7 @@ end
     new_edge = ForceBundle.update_divisions(Edge(original_edge), 3)
     new_nodes = ForceBundle.nodes(new_edge)
 
+    @test a == new_nodes[1]
     @test ForceBundle.bundled_length(original_edge) ≈ 4 * sqrt(5)
     @test aux1 ≈ new_nodes[2]
     @test 2 * aux1 + a ≈ new_nodes[3]
