@@ -32,6 +32,11 @@ end
 
 bundled_length(edge::Edge) = bundled_length(nodes(edge))
 
+"""
+    update_divisions(edge::Edge, P)
+Creates a new `Edge` with `P` subdivisions, trying to preserve 
+the shape of the original `edge`. 
+"""
 function update_divisions(edge::Edge, P)
     L = bundled_length(edge)
     nods = nodes(edge)
