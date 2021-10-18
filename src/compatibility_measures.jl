@@ -138,3 +138,18 @@ Cv(P::Edge, Q::Edge) = visibility(P,Q) * visibility(Q,P)
 Default compatibility measure 
 """
 compatibility(P::Edge, Q::Edge) = Ca(P,Q) * Cs(P,Q) * Cp(P,Q) * Cv(P,Q)
+
+
+#=
+function calculate_compatibility(edges, threshold)
+    N = length(edges)
+    compat_matrix = Array{Float64,2}(undef, N, N)
+    for i in 1:N
+        for j in i+1:N
+            C = compatibility(edges[i], edges[j])
+            compat_matrix[i,j] = C > threshold ? C : 0.0
+        end
+    end
+    UpperTriangular(compat_matrix)
+end
+=#
