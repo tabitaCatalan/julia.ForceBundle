@@ -22,6 +22,7 @@ end
         #markershape := :none
     end =#
     seriesalpha --> 0.155  # if alpha is unset, make it 0.155 
+    label --> :none
     # return series data 
     xs(P), ys(P)    
 end
