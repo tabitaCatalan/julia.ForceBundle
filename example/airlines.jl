@@ -12,7 +12,7 @@ using ForceBundle
 # -922.24444,-347.29444,-741.68611,-406.925
 # ...
 # ```
-DATA = joinpath(@__DIR__, "data", "airlines.jl")
+DATA = joinpath(@__DIR__, "data", "airlines.csv")
 edges = read_edges_csv(DATA; subdivisions = 1);
 
 # We select the first 100 edges 
