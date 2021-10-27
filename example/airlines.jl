@@ -12,16 +12,17 @@ using ForceBundle
 # -922.24444,-347.29444,-741.68611,-406.925
 # ...
 # ```
-
-edges = read_edges_csv("data\\airlines.csv"; subdivisions = 1);
+DATA = joinpath(@__DIR__, "data", "airlines.jl")
+edges = read_edges_csv(DATA; subdivisions = 1);
 
 # We select the first 100 edges 
 edges = edges[1:100];
 
-# ## Deform using [`forcebundle`](@ref) function 
+# ## Bundle the edges 
+# We use the [`forcebundle`](@ref) function 
 bundled_edges = forcebundle(edges, P_initial = 2);
 
-# ## Graficar 
+# ## Plot results  
 using Plots: plot, plot! 
 
 # A recipe is defined for `Edge`s, so we can use `plot(::Edge)` or `plot!(::Edge)`.
