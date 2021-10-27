@@ -5,7 +5,7 @@ using Literate
 # https://github.com/fredrikekre/Literate.jl/blob/master/docs/make.jl
 EXAMPLE = joinpath(@__DIR__, "..", "example", "airlines.jl")
 OUTPUT = joinpath(@__DIR__, "src", "examples")
-Literate.markdown(EXAMPLE, outputdir=OUTPUT)
+Literate.markdown(EXAMPLE, OUTPUT)
 
 makedocs(modules=[ForceBundle],
          doctest=false, clean=true,
