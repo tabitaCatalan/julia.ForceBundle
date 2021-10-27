@@ -3,13 +3,13 @@
 TODO description of FDEB
 
 The principal function is `forcebundle`:
-```docs 
+```@docs 
 forcebundle
 ``` 
 ## Utilities 
 
 ### Read data
-```docs 
+```@docs 
 ForceBundle.read_edges_csv
 ```
 
