@@ -1,8 +1,11 @@
 using ForceBundle, Documenter 
 using Literate 
 
-# Process airlines.jl example 
-Literate.markdown("..\\example\\airlines.jl", outputdir="src\\examples\\")
+# Process airlines.jl example. Path Processing idea from 
+# https://github.com/fredrikekre/Literate.jl/blob/master/docs/make.jl
+EXAMPLE = joinpath(@__DIR__, "..", "example", "airlines.jl")
+OUTPUT = joinpath(@__DIR__, "src", "examples")
+Literate.markdown(EXAMPLE, outputdir=OUTPUT)
 
 makedocs(modules=[ForceBundle],
          doctest=false, clean=true,
