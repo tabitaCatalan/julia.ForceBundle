@@ -1,5 +1,8 @@
 using ForceBundle, Documenter 
+using Literate 
 
+# Process airlines.jl example 
+Literate.markdown("..\\example\\airlines.jl", outputdir="src\\examples\\")
 
 makedocs(modules=[ForceBundle],
          doctest=false, clean=true,
