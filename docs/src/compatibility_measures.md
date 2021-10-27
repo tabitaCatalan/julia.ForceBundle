@@ -4,6 +4,6 @@ All compatibility measures defined by [paper]() are available.
 
 ## Angle Compatibility 
 
-```docs
+```@docs
 ForceBundle.Ca 
 ```
