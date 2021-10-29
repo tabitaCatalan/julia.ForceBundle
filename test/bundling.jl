@@ -42,3 +42,17 @@ end
     @test d + sqrt(5)*(c-d)/norm(c-d) ≈ new_nodes[4]
     @test d ≈ new_nodes[5]
 end 
+
+@testset "update divisions v2" begin
+    p0 = Point(-1.,0.)
+    p1 = Point(0.,1.)
+    P = Edge(p0, p1)
+    P3 = ForceBundle.update_divisions(P, 3)
+    P32 = ForceBundle.update_divisions(P3, 2)
+    L32 = ForceBundle.nodes(P32)
+    @test L32[1] ≈ p0 
+    @test L32[end] ≈ p1
+    @test length(L32) == 4
+    @test L32[2] ≈ p0 + (p1 - p0) * (1/3)
+    @test L32[3] ≈ p0 + (p1 - p0) * (2/3)
+end 
