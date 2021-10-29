@@ -1,4 +1,5 @@
 using Test, ForceBundle, StructArrays, LinearAlgebra
+using ForceBundle: ≲, ≳
 
 @testset "bundling" begin
     p0 = Point(0.,0.)
@@ -56,3 +57,7 @@ end
     @test L32[2] ≈ p0 + (p1 - p0) * (1/3)
     @test L32[3] ≈ p0 + (p1 - p0) * (2/3)
 end 
+
+# Utils
+@test 1. + eps() ≲ 1.
+@test 1. ≳ 1. + eps()
