@@ -32,6 +32,10 @@ end
 
 bundled_length(edge::Edge) = bundled_length(nodes(edge))
 
+# approximate leq and geq 
+≲(a,b) = (a ≤ b) || (a ≈ b) 
+≳(a,b) = (a ≥ b) || (a ≈ b) 
+
 """
     update_divisions(edge::Edge, P)
 Creates a new `Edge` with `P` subdivisions, trying to preserve 
