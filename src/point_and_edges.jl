@@ -5,6 +5,11 @@ struct Point{T} <: FieldVector{2, T}
     y::T
 end
 
+# Pretty printing for Point 
+# Ver  https://docs.julialang.org/en/v1/manual/types/#man-custom-pretty-printing
+Base.show(io::IO, p::ForceBundle.Point) = print(io, "p(", p.x, ", ", p.y, ")")
+
+
 #=
 Usaré la interfaz ListOfNodes, que permite las siguientes operaciones 
 =# 
@@ -69,3 +74,12 @@ len(P::Edge) = norm(asvector(P))
 
 xs(P::Edge) = xs(nodes(P))
 ys(P::Edge) = ys(nodes(P))
+
+# Pretty printing for Edge 
+function Base.show(io::IO, P::Edge)
+    print(io, "Edge: s = ", nodes(P)[1])
+    for node in nodes(P)[2:end]
+        print(io, " --> ", node)
+    end    
+    print(io, " = t")
+end
