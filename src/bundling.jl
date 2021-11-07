@@ -1,4 +1,5 @@
 using Statistics: median
+using ProgressMeter 
 
 """
 bundle!(P::Edge, forces, ds)
@@ -112,7 +113,7 @@ function forcebundle(edges; C = 6,
     P = P_initial
     I = I_initial
 
-    for _c in 1:C # cycle of bundling 
+    @showprogress 1 for _c in 1:C # cycle of bundling 
         
         for _i in 1:I # iterations per cycle 
             edges = bundling_cycle(edges, S, P, K, compatibility_threshold) 
