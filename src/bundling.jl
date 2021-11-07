@@ -87,28 +87,26 @@ Use Force Directed Edge Bundling to modify a list of `Edge`s.
 - `edges`: array of `Edge`s.
 ## Optional arguments  
 - `C = 6`: number of cycles of bundling to perform.
-- `K = 1`: global bundling constant controlling edge stiffness.
-- `S_initial = median(bundled_length.(edges))`: initial distance to move points.
+- `K = 0.1`: global bundling constant controlling edge stiffness.
+- `S_initial = 0.1 * median(bundled_length.(edges))`: initial distance to move points.
 - `S_rate = 0.5`: distance rate decreases (`0 < S_rate < 1`).
 - `P_initial = 1`: initial subdivision number.
 - `P_rate = 2`: subdivision rate increase (`1 < P_rate`).
-- `I_initial = 70`: initial number of iterations per cycle.
+- `I_initial = 60`: initial number of iterations per cycle.
 - `I_rate = 2/3`: rate at which iteration number decreases (`0 < I_rate < 1`). 
-## Future arguments (work in progress)
-- `compatibility_threshold`: two edges `P` and `Q` only interact when `ForceBundle.compatibility(P,Q) > compatibility_threshold`. 
+- `compatibility_threshold = 0.5`: two edges `P` and `Q` only interact when `ForceBundle.compatibility(P,Q) > compatibility_threshold`. 
     Must be a number in `(0,1)`.
 """
 function forcebundle(edges; C = 6,
-                            K = 1.,
-                            S_initial = median(bundled_length.(edges)), 
+                            K = 0.1,
+                            S_initial = 0.1 * median(bundled_length.(edges)), 
                             S_rate = 0.5,
-                            P_initial = 2, 
+                            P_initial = 1, 
                             P_rate = 2, 
-                            I_initial = 70, 
+                            I_initial = 60, 
                             I_rate = 2/3, 
-                            compatibility_threshold = 0.7
+                            compatibility_threshold = 0.5
                             ) 
-
     S = S_initial
     P = P_initial
     I = I_initial
