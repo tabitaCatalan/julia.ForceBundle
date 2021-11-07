@@ -22,7 +22,7 @@ edges = edges[1:200];
 # ## Bundle the edges 
 # We use the [`forcebundle`](@ref) function 
 
-bundled_edges = forcebundle(edges);                            );
+bundled_edges = forcebundle(edges);                            
 
 # ## Plot results  
 using Plots: plot, plot! 
