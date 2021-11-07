@@ -52,14 +52,14 @@ function update_divisions(edge::Edge, P)
     while i <= length(nods)
         old_segment = norm(nods[i] - current_node)
         direction = (nods[i] - current_node)/old_segment
-        if remaining_segment_len > old_segment # me paso de largo
-            remaining_segment_len -= old_segment
-            current_node = nods[i]
-            i += 1
-        else
+        if remaining_segment_len ≲ old_segment 
             current_node += remaining_segment_len * direction
             push_node!(new_nodes, current_node)
             remaining_segment_len = new_segments_len
+        else # me paso de largo 
+            remaining_segment_len -= old_segment
+            current_node = nods[i]
+            i += 1
         end
     end
     return Edge(new_nodes)
