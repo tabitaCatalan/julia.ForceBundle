@@ -26,20 +26,20 @@ ForceFactor = Point
 - `edges`: a list of `Edge`s.
 - `index`: of edge which is being deformated.
 """
-function eforce_on_node_i(i, edges, index) # TODO change variable to more descriptive ones 
+function eforce_on_node_i(i, edges, index, threshold) # TODO change variable to more descriptive ones 
     # eforce on node i of index-th edge, induced by edge j (node i)
-    eforces_on_node_i_from_edge_j = (i, j) -> electro_force(nodes(edges[index])[i], nodes(edges[j])[i], compatibility(edges[index], edges[j]))
+    #eforces_on_node_i_from_edge_j = (i, j) -> electro_force(nodes(edges[index])[i], nodes(edges[j])[i], compatibility(edges[index], edges[j]))
     force = ForceFactor(0.0,0.0)
     for j in 1:length(edges) # recorrer todas las aristas 
-        if index != j # no induce fuerza sobre si mismo 
-            force += eforces_on_node_i_from_edge_j(i,j)
+        if index != j && are_compatible(edges[j], edges[index], threshold) # no induce fuerza sobre si mismo y son compatibles
+            force += electro_force(nodes(edges[index])[i], nodes(edges[j])[i], compatibility(edges[index], edges[j]))
         end
     end
     force
 end
 
-function calculate_electro_forces(edges, index)
-    ListOfNodes([eforce_on_node_i(i,edges, index) for i in inner_range(edges[index])])
+function calculate_electro_forces(edges, index, threshold)
+    ListOfNodes([eforce_on_node_i(i,edges, index, threshold) for i in inner_range(edges[index])])
 end
 
 """

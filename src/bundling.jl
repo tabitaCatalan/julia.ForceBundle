@@ -17,9 +17,9 @@ function bundle!(P::Edge, inner_forces, ds)
 end
 
 
-function bundling_iteration!(edges, K, ds)
+function bundling_iteration!(edges, K, ds, threshold)
     range = 1:length(edges)
-    forces = [calculate_electro_forces(edges, i) + calculate_spring_forces(edges[i], K) for i in range]
+    forces = [calculate_electro_forces(edges, i, threshold) + calculate_spring_forces(edges[i], K) for i in range]
     for i in range
         bundle!(edges[i], forces[i], ds)
     end
@@ -73,9 +73,9 @@ TODO not process small edges
 TODO use compat measures
 =#
 
-function bundling_cycle(edges, ds, P, K) 
+function bundling_cycle(edges, ds, P, K, threshold) 
     edges = update_divisions.(edges, P)
-    bundling_iteration!(edges, K, ds)
+    bundling_iteration!(edges, K, ds, threshold)
     edges 
 end 
 
@@ -115,7 +115,7 @@ function forcebundle(edges; C = 6,
     for _c in 1:C # cycle of bundling 
         
         for _i in 1:I # iterations per cycle 
-            edges = bundling_cycle(edges, S, P, K) 
+            edges = bundling_cycle(edges, S, P, K, compatibility_threshold) 
         end 
         # prepare for next cycle
         S = S * S_rate 

@@ -139,7 +139,7 @@ Default compatibility measure
 """
 compatibility(P::Edge, Q::Edge) = Ca(P,Q) * Cs(P,Q) * Cp(P,Q) * Cv(P,Q)
 
-
+are_compatible(P::Edge, Q::Edge, threshold) = compatibility(P,Q) ≥ threshold
 #=
 function calculate_compatibility(edges, threshold)
     N = length(edges)
